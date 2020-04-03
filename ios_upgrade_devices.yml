@@ -1,0 +1,12 @@
+---
+
+- name: Upgrade IOS on Cisco devices
+  hosts: ISR
+  gather_facts: no
+  vars_files:
+    - vars/provider.yml
+    - vars/ios_precheck_vars.yml
+  roles:
+    - role: pre_verification
+    - role: upgrade
+    - role: post_verification

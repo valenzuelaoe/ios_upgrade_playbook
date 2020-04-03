@@ -1,0 +1,51 @@
+---
+
+- name: Gather router facts
+  ios_facts:
+
+- name: staging code on router and md5 verification
+  ios_command:
+    commands:
+      - 'copy ftp://anonymous@10.178.50.107/c2900-universalk-9-mz.SPA.157-3.M4a.bin flash'
+      - 'dir flash:'
+      - 'verify /md5 c2900-universalk9-mz.SPA.157-3.M4a.bin'
+      wait_for:
+      - result[0] contains: "{{ md5_verification }}"
+  register: md5_result
+- debug: var=md5_result
+
+- name: Change boot system
+  ios_config:
+    lines:
+      - 'no boot system flash {{ ansible_net_version }}'
+      - 'boot system flash {{ compliant_ios }}'
+      - 'wr mem'
+
+- name: reload network device
+  ios_command:
+    commands:
+      - "reload\n"
+
+  wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    delay: 300
+  delegate_to: localhost
+
+
+  register: reload_output
+- debug: var=reload_output
+
+
+- name: Change OSPF cost away from circuit
+  ios_config:
+    lines:
+      - 'ip ospf cost {{cost_away}}'
+    parents: {{tunnel_interface}}
+
+- name: Change HSRP priority to adjust traffic away from device
+  ios_config:
+    lines:
+      - 'hsrp priority 120'
+    parents: {{hsrp_interface}}
+
