@@ -1,7 +1,13 @@
-# ios_upgrade_playbook
-Ansible Playbook to upgrade IOS in Cisco routers
-Using the tree command you can see the file structure I'm using
+# IOS_Upgrade_Playbook
 
+Ansible Playbook to upgrade IOS in Cisco routers.<br>
+I will continue to add to the repo as far as building the inventory file for different flavor of ios models.
+<br>
+<br>
+Below is the file structure of the playbook:
+
+
+```
 └─ $ ▶ tree
 .
 ├── ansible.cfg
@@ -23,5 +29,5 @@ Using the tree command you can see the file structure I'm using
     └── ios_prechecks_vars.yml
 
 8 directories, 9 files
-
+```
 
