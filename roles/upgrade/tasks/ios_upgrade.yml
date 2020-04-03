@@ -6,7 +6,11 @@
 - name: staging code on router and md5 verification
   ios_command:
     commands:
+<<<<<<< HEAD
       - 'copy ftp://username@XX.XXX.XXX.XXX/c2900-universalk-9-mz.SPA.157-3.M4a.bin flash'
+=======
+      - 'copy ftp://username@XX.XX.XXX.XXX/c2900-universalk-9-mz.SPA.157-3.M4a.bin flash'
+>>>>>>> 6f5d58d22e2bcbbc83812f8d29121913bae3cd29
       - 'dir flash:'
       - 'verify /md5 c2900-universalk9-mz.SPA.157-3.M4a.bin'
       wait_for:
@@ -35,3 +39,7 @@
 
   register: reload_output
 - debug: var=reload_output
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6f5d58d22e2bcbbc83812f8d29121913bae3cd29
